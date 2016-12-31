@@ -6,7 +6,7 @@
     </div>
     <div class="weather">
       <h2>{{ location }}</h2>
-      <h2>{{ temperatureInFahrenheit }}&deg; F</h2>
+      <h2>{{ convertTemperature }}&deg; <button @click="toggleUnits">{{ this.units }}</button></h2>
     </div>
   </div>
 </template>
@@ -22,7 +22,8 @@ export default {
       longitude: '',
       weatherDescription: '',
       location: '',
-      temperature: ''
+      temperature: '',
+      units: 'F'
     }
   },
   methods: {
@@ -56,13 +57,26 @@ export default {
         }).catch(error => {
             console.log(error);
         });
+    },
+    toggleUnits() {
+      if (this.units == 'F') {
+        this.units = 'C';
+      }
+      else {
+        this.units = 'F';
+      }
     }
   },
   computed: {
-      temperatureInFahrenheit() {
+      convertTemperature() {
           // The temperature is returned in Kelvin; 
           // convert it to fahrenheit.
-          return Math.floor((this.temperature * (9/5)) - 459.67);
+          if (this.units == 'F') {
+            return Math.floor((this.temperature * (9/5)) - 459.67);
+          }
+          else {
+            return Math.floor(this.temperature -273.15);
+          }
       }
   },
   created() {
