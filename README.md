@@ -2,6 +2,8 @@
 
 > Local weather for FreeCodeCamp
 
+TODO: IT LOOKS HORRIBLE NEED TO STYLE IT!
+
 ## Build Setup
 
 ``` bash
